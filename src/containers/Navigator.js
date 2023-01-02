@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Colors from '../theme/Colors';
@@ -49,7 +49,6 @@ const tabScreens = [
       tabBarLabel: 'Now Playing',
       tabBarActiveTintColor,
       tabBarInactiveTintColor,
-      unmountOnBlur: true,
       tabBarIcon: e => getTabBarIcon(Movie, e),
     },
   },
@@ -60,7 +59,6 @@ const tabScreens = [
       tabBarLabel: 'Top Rated',
       tabBarActiveTintColor,
       tabBarInactiveTintColor,
-      unmountOnBlur: true,
       tabBarIcon: e => getTabBarIcon(Star, e),
     },
   },
@@ -68,11 +66,8 @@ const tabScreens = [
 
 const screenOptions = () => ({
   headerShown: false,
-  tabBarStyle: {
-    height: 80,
-    paddingBottom: 16,
-    backgroundColor: Colors.yellow1,
-  },
+  tabBarStyle: styles.tabBarStyle,
+  tabBarHideOnKeyboard: true,
 });
 
 const navigationTheme = {
@@ -86,8 +81,8 @@ const navigationTheme = {
 const Navigator = () => {
   return (
     <>
-      <SafeAreaView style={{flex: 0, backgroundColor: Colors.yellow1}} />
-      <SafeAreaView style={{flex: 1, backgroundColor: Colors.yellow1}}>
+      <SafeAreaView style={styles.safeAreaOne} />
+      <SafeAreaView style={styles.safeAreaTwo}>
         <StatusBar barStyle="dark-content" hidden={false} />
         <NavigationContainer theme={navigationTheme}>
           <Tab.Navigator screenOptions={screenOptions}>
@@ -98,7 +93,6 @@ const Navigator = () => {
                   name={name}
                   component={component}
                   options={options}
-                  listeners={{tabPress: () => {}}}
                 />
               );
             })}
@@ -110,3 +104,19 @@ const Navigator = () => {
 };
 
 export default Navigator;
+
+const styles = StyleSheet.create({
+  tabBarStyle: {
+    height: 80,
+    paddingBottom: 16,
+    backgroundColor: Colors.yellow1,
+  },
+  safeAreaOne: {
+    flex: 0,
+    backgroundColor: Colors.yellow1,
+  },
+  safeAreaTwo: {
+    flex: 1,
+    backgroundColor: Colors.yellow1,
+  },
+});

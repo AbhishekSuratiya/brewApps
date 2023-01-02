@@ -1,12 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import awsSlice from '../reducers/awsReducer';
-import locationSlice from '../reducers/locationReducer';
-// import {logger} from '../logger';
+import {configureStore} from '@reduxjs/toolkit';
+import searchSlice from '../reducers/searchReducer';
+import {logger} from '../logger';
 
 const store = configureStore({
   reducer: {
-    awsStore: awsSlice.reducer,
-    locationStore: locationSlice.reducer,
+    searchStore: searchSlice.reducer,
   },
   // Uncomment this to view redux logs
   // middleware: [logger],
